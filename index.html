@@ -4,13 +4,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>Préstamos — Control Personal</title>
-
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="Préstamos" />
 <meta name="theme-color" content="#172033" />
-<link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2489/2489756.png" />
-
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
@@ -37,6 +34,8 @@
     --orange-soft: #FFF2DD;
     --blue: #1F4E79;
     --blue-soft: #E8F1F8;
+    --wa: #22C55E;
+    --wa-soft: #E7F6EF;
     --radius: 10px;
     --radius-lg: 14px;
     --shadow-sm: 0 1px 3px rgba(16,24,40,0.07);
@@ -50,7 +49,7 @@
     background: linear-gradient(180deg, #E4EEF7 0, #EFF5FB 280px, #F6F9FC 100%);
     color: var(--text); min-height: 100vh; font-size: 14px;
     -webkit-font-smoothing: antialiased;
-    padding-top: env(safe-area-inset-top); /* Soporte iPhone Notch */
+    padding-top: env(safe-area-inset-top);
   }
 
   /* ── TOPBAR ── */
@@ -69,13 +68,13 @@
   .topbar-name { font-size: 15px; font-weight: 700; color: #fff; letter-spacing: -0.2px; }
   .topbar-sub  { font-size: 11px; color: rgba(255,255,255,0.45); font-family: var(--font-mono); }
   .topbar-status { display:flex; align-items:center; gap:6px; font-size:11px; font-family:var(--font-mono); }
-  .status-dot { width:8px; height:8px; border-radius:50%; background:#94A3B8; }
+  .status-dot { width:8px; height:8px; border-radius:50%; background:#94A3B8; transition: background 0.3s; }
   .status-dot.online  { background:#22C55E; box-shadow:0 0 6px #22C55E; }
   .status-dot.offline { background:#EF4444; }
   .status-label { color:rgba(255,255,255,0.5); }
 
   /* ── LAYOUT ── */
-  .app { width: min(1160px, calc(100% - 20px)); margin: 0 auto; padding: 16px 0 48px; }
+  .app { width: min(1160px, calc(100% - 20px)); margin: 0 auto; padding: 16px 0 60px; }
 
   /* ── PAGE HEADER ── */
   .page-header {
@@ -83,16 +82,15 @@
     border: 1px solid rgba(215,222,232,0.8); border-radius: var(--radius-lg);
     padding: 14px 16px; margin-bottom: 14px;
     display: flex; align-items: center; justify-content: space-between;
-    flex-wrap: wrap; gap: 12px; box-shadow: var(--shadow);
+    flex-wrap: wrap; gap: 10px; box-shadow: var(--shadow);
   }
-  .page-header h1 { font-size: 20px; font-weight: 700; display: flex; align-items: center; gap: 8px; letter-spacing: -0.3px; }
+  .page-header h1 { font-size: 20px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
   .page-header h1 .h-icon {
     width: 34px; height: 34px; border-radius: 10px; background: #173B5C; color: #fff;
     display: inline-flex; align-items: center; justify-content: center; font-size: 18px;
   }
-  .page-header p { font-size: 12px; color: var(--text2); margin-top: 2px; }
-  .header-actions { display: flex; gap: 8px; align-items: center; width: 100%; justify-content: space-between; }
-  .header-actions button { flex: 1; justify-content: center; }
+  .header-actions { display: flex; gap: 8px; width: 100%; }
+  .header-actions .btn { flex: 1; justify-content: center; }
 
   /* ── BUTTONS ── */
   button { font-family: var(--font-sans); cursor: pointer; transition: all 0.16s ease; -webkit-tap-highlight-color: transparent; }
@@ -105,12 +103,16 @@
   .btn-info { background: var(--blue-soft); color: var(--blue); border: 1px solid #BED5E8; }
   .btn-danger-soft { background: var(--red-soft); color: var(--red); border: 1px solid #F8C8C4; }
   .btn-ghost { background: transparent; color: var(--text2); border: 1px solid transparent; padding: 7px 12px; }
-  .btn-ghost-danger { background: transparent; color: var(--red); border: 1px solid transparent; padding: 7px 12px; border-radius: var(--radius); }
-  .btn-icon { background: transparent; border: 1px solid transparent; padding: 8px; border-radius: 8px; color: var(--text2); font-size: 18px; line-height: 1; display: inline-flex; align-items: center; justify-content: center; }
-  .btn-icon:hover, .btn-icon:active { background: var(--surface3); color: var(--text); }
+  .btn-wa { background: var(--wa); color: #fff; border: none; }
+  .btn-wa:hover { background: #16A34A; }
+  .btn-icon {
+    background: transparent; border: 1px solid transparent; padding: 8px; border-radius: 8px;
+    color: var(--text2); font-size: 18px; line-height: 1;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .btn-icon:active { background: var(--surface3); color: var(--text); }
   .btn-icon.danger:active { background: var(--red-soft); color: var(--red); }
-  .btn-icon.success:active { background: var(--green-soft); color: var(--green); }
-  .btn-icon.whatsapp { background: #E7F6EF; color: #22C55E; border-color: #B9E6D1; }
+  .btn-icon.wa { background: var(--wa-soft); color: var(--wa); border-color: #B9E6D1; }
 
   /* ── STATS ── */
   .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 14px; }
@@ -119,15 +121,13 @@
     padding: 12px; box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
   }
   .stat-card::before { content:''; position:absolute; inset:0 0 auto 0; height:3px; background:var(--sc-color, var(--accent)); }
-  .stat-card .sc-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
-  .stat-card .sc-label { font-size:10px; font-weight:600; color:var(--text3); text-transform:uppercase; letter-spacing:0.5px; }
-  .stat-card .sc-icon { width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;background:var(--sc-bg,var(--accent-soft));color:var(--sc-color,var(--accent)); }
-  .stat-card .sc-val { font-size:18px; font-weight:700; letter-spacing:-0.3px; }
-  .stat-card .sc-hint { font-size:11px; color:var(--text3); margin-top:2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .stat-card.warning { --sc-color: var(--orange); --sc-bg: var(--orange-soft); }
-  .stat-card.danger  { --sc-color: var(--red);    --sc-bg: var(--red-soft); }
-  .stat-card.success { --sc-color: var(--green);  --sc-bg: var(--green-soft); }
-  .stat-card.info    { --sc-color: var(--blue);   --sc-bg: var(--blue-soft); }
+  .stat-card .sc-label { font-size:10px; font-weight:600; color:var(--text3); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px; }
+  .stat-card .sc-val { font-size:20px; font-weight:700; letter-spacing:-0.3px; }
+  .stat-card .sc-hint { font-size:11px; color:var(--text3); margin-top:2px; }
+  .stat-card.warning { --sc-color: var(--orange); }
+  .stat-card.danger  { --sc-color: var(--red); }
+  .stat-card.success { --sc-color: var(--green); }
+  .stat-card.info    { --sc-color: var(--blue); }
 
   /* ── PANEL ── */
   .panel { background: var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:14px; margin-bottom:14px; box-shadow:var(--shadow-sm); }
@@ -135,7 +135,8 @@
   .panel-title i { color:var(--accent); font-size:18px; }
 
   /* ── FORM ── */
-  .form-grid { display:grid; grid-template-columns:1fr; gap:12px; }
+  .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .form-grid .field.full { grid-column: 1 / -1; }
   .field { display:flex; flex-direction:column; gap:4px; }
   .field label { font-size:12px; font-weight:600; color:var(--text2); }
   .field input, .field select {
@@ -143,177 +144,223 @@
     background: #fff; color: var(--text); font-size: 14px; font-family: var(--font-sans);
     transition: border-color 0.15s; -webkit-appearance: none;
   }
-  .field input:focus { outline:none; border-color:#2E6E9E; }
-  .field input.invalid { border-color: var(--red) !important; background-color: #FFF5F5; }
+  .field input:focus { outline:none; border-color:#2E6E9E; box-shadow: 0 0 0 3px rgba(31,78,121,0.1); }
+  .field input.invalid { border-color: var(--red) !important; background: #FFF5F5; }
 
   /* ── CALC BAR ── */
   .calc-bar {
     display: grid; grid-template-columns: repeat(3,1fr); gap: 8px;
-    margin-top: 12px; padding: 8px; background: var(--surface2); border-radius: 10px;
+    margin-top: 12px; padding: 10px; background: var(--surface2); border-radius: 10px; border: 1px solid var(--border);
   }
   .calc-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 8px; text-align: center; }
-  .calc-item .ci-label { font-size:9px; font-weight:600; color:var(--text3); text-transform:uppercase; }
-  .calc-item .ci-val { font-size:13px; font-weight:700; color:var(--text); font-family:var(--font-mono); margin-top:2px; }
+  .calc-item .ci-label { font-size:9px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing: 0.3px; }
+  .calc-item .ci-val { font-size:14px; font-weight:700; color:var(--text); font-family:var(--font-mono); margin-top:3px; }
   .calc-item .ci-val.green { color:var(--green); }
 
-  /* ── PAYMENT TIPO BTNS ── */
+  /* ── TIPO PAGO BTNS ── */
+  .tipo-pago-row { display:flex; gap:6px; margin-bottom:12px; }
   .pago-tipo-btn {
-    flex: 1; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
-    padding: 10px 6px; border-radius: var(--radius); border: 1.5px solid var(--border2);
-    background: var(--surface2); color: var(--text2); font-size: 12px; font-weight: 600; gap: 4px;
+    flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 9px 4px; border-radius: var(--radius); border: 1.5px solid var(--border2);
+    background: var(--surface2); color: var(--text2); font-size: 11px; font-weight: 700; gap: 3px;
+    text-align: center; cursor: pointer; font-family: var(--font-sans); transition: all 0.15s;
   }
-  .pago-tipo-btn small { font-weight: 400; font-size: 9px; opacity: 0.8; }
+  .pago-tipo-btn i { font-size: 16px; }
+  .pago-tipo-btn small { font-size: 9px; font-weight: 400; opacity: 0.75; line-height: 1.2; }
   .pago-tipo-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .pago-tipo-btn.active small { opacity: 0.85; }
 
   /* ── PAYMENT SUMMARY ── */
   .payment-summary {
     display: grid; grid-template-columns: repeat(3,1fr); gap: 6px;
-    margin-top: 12px; padding: 8px; background: var(--surface2); border-radius: 10px;
+    margin-top: 12px; padding: 8px; background: var(--surface2); border-radius: 10px; border: 1px solid var(--border);
   }
   .payment-summary > div { background:#fff; border:1px solid var(--border); border-radius:8px; padding:8px; text-align: center; }
-  .payment-summary .ps-label { font-size:9px; font-weight:600; color:var(--text3); text-transform:uppercase; }
-  .payment-summary .ps-val { font-size:12px; font-weight:700; font-family:var(--font-mono); margin-top:2px; }
+  .payment-summary .ps-label { font-size:9px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing: 0.3px; }
+  .payment-summary .ps-val { font-size:13px; font-weight:700; font-family:var(--font-mono); margin-top:3px; }
+  .ps-val.orange { color:var(--orange); }
+  .ps-val.green  { color:var(--green); }
+  .ps-val.red    { color:var(--red); }
+
+  /* ── EXPLICACION BOX ── */
+  .explicacion-box {
+    font-size:12px; color:var(--text2); margin-top:8px;
+    background:#fff; padding:10px 12px; border-radius:8px;
+    border-left: 3px solid var(--accent); line-height:1.5;
+  }
+  .explicacion-box.warn { border-left-color: var(--red); color: var(--red); }
 
   /* ── FILTERS ── */
   .filter-row { display:flex; gap:8px; align-items:center; margin-bottom:12px; }
   .search-input {
     flex:1; padding:10px 12px; border:1px solid var(--border2);
-    border-radius:var(--radius); background:#fff; color:var(--text); font-size:13px;
+    border-radius:var(--radius); background:#fff; color:var(--text); font-size:13px; font-family:var(--font-sans);
   }
+  .search-input:focus { outline:none; border-color:#2E6E9E; }
   .filter-select {
-    padding:10px 10px; border:1px solid var(--border2); border-radius:var(--radius);
-    background:#fff; color:var(--text); font-size:13px; max-width: 130px;
+    padding:10px 8px; border:1px solid var(--border2); border-radius:var(--radius);
+    background:#fff; color:var(--text); font-size:12px; font-family:var(--font-sans); max-width:120px;
   }
 
-  /* ── TABLE / LIST RESPONSIVE FOR MOBILE ── */
+  /* ── TABLE ── */
   .table-wrap { border:1px solid var(--border); border-radius:12px; overflow:hidden; background:#fff; }
   table { width:100%; border-collapse:collapse; }
-  
-  /* Escondemos columnas secundarias en móviles para que no se rompa la pantalla */
-  th:nth-child(4), td:nth-child(4),
-  th:nth-child(5), td:nth-child(5),
-  th:nth-child(6), td:nth-child(6),
-  th:nth-child(8), td:nth-child(8) { display: none; }
-
-  th { font-size:10px; font-weight:700; color:#526071; padding:10px 8px; border-bottom:1px solid var(--border); background:#F7FAFD; text-transform:uppercase; }
-  td { padding:12px 8px; border-bottom:1px solid var(--border); vertical-align:middle; }
+  th { font-size:10px; font-weight:700; color:#526071; padding:10px 8px; border-bottom:1px solid var(--border); background:#F7FAFD; text-transform:uppercase; letter-spacing: 0.04em; }
+  td { padding:11px 8px; border-bottom:1px solid var(--border); vertical-align:middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:active td { background: var(--surface2); }
   .td-mono { font-family:var(--font-mono); font-size:11px; }
-  .td-name { font-weight:600; max-width:110px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:13px; }
-  .td-mora { font-size:10px; color:var(--red); font-family:var(--font-mono); font-weight: 700; }
+  .td-name { font-weight:600; max-width:100px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:13px; }
+  .td-mora { font-size:10px; color:var(--red); font-family:var(--font-mono); font-weight:700; }
 
   /* ── BADGES ── */
-  .badge { display:inline-flex; align-items:center; justify-content:center; min-width:65px; font-size:10px; font-weight:700; padding:3px 6px; border-radius:999px; }
+  .badge { display:inline-flex; align-items:center; font-size:10px; font-weight:700; padding:3px 7px; border-radius:999px; }
   .badge-active  { background:var(--green-soft); color:var(--green); }
   .badge-paid    { background:var(--blue-soft);  color:var(--blue); }
   .badge-late    { background:var(--red-soft);   color:var(--red); }
   .badge-due     { background:var(--orange-soft);color:var(--orange); }
 
-  /* ── DETAIL CARD ── */
+  /* ── DETAIL ── */
   .detail-overlay { display:none; }
   .detail-overlay.show { display:block; }
   .detail-card {
     background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--accent);
     border-radius: var(--radius-lg); padding: 14px; margin-bottom: 14px; box-shadow: var(--shadow-lg);
+    animation: fadeIn 0.18s ease;
   }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:none; } }
   .detail-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; }
   .detail-name { font-size:18px; font-weight:700; }
   .detail-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin-bottom:12px; }
   .detail-item { background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:8px; }
-  .detail-item .di-label { font-size:9px; color:var(--text3); font-weight:600; text-transform:uppercase; }
-  .detail-item .di-val { font-size:12px; font-weight:700; font-family:var(--font-mono); margin-top:2px; }
+  .detail-item .di-label { font-size:9px; color:var(--text3); font-weight:700; text-transform:uppercase; letter-spacing:0.3px; }
+  .detail-item .di-val { font-size:13px; font-weight:700; font-family:var(--font-mono); margin-top:2px; }
   .di-val.green { color:var(--green); }
   .di-val.red   { color:var(--red); }
   .di-val.orange{ color:var(--orange); }
-  
+
+  /* caja intereses a cobrar hoy */
+  .int-hoy-box {
+    background: var(--orange-soft); border: 1px solid #F0C57A; border-radius: 10px;
+    padding: 10px 14px; margin-bottom: 12px;
+    display: flex; justify-content: space-between; align-items: center; gap: 10px;
+  }
+  .int-hoy-box .ihl { font-size:10px; font-weight:700; color:var(--orange); text-transform:uppercase; margin-bottom:2px; }
+  .int-hoy-box .ihv { font-size:20px; font-weight:700; color:var(--orange); font-family:var(--font-mono); }
+  .int-hoy-box .ihs { font-size:10px; color:var(--orange); opacity:0.8; margin-top:1px; }
+
   .progress-bg { background:#E8EEF5; border-radius:999px; height:7px; overflow:hidden; margin:10px 0 4px; }
-  .progress-fill { height:100%; background:linear-gradient(90deg, var(--green), var(--accent)); }
+  .progress-fill { height:100%; background:linear-gradient(90deg, var(--green), var(--accent)); border-radius:999px; transition: width 0.4s; }
   .progress-labels { display:flex; justify-content:space-between; font-size:11px; color:var(--text3); margin-bottom:12px; }
-  .detail-actions { display:flex; flex-direction:column; gap:8px; margin-top:10px; }
-  .detail-actions button { width:100%; justify-content:center; padding:11px; }
+  .detail-actions { display:flex; flex-direction:column; gap:8px; margin-top:12px; }
+  .detail-actions .btn { width:100%; justify-content:center; padding:11px; }
 
-  /* ── PAGOS ── */
-  .pagos-title { font-size:12px; font-weight:700; color:var(--text2); margin:12px 0 6px; }
-  .pago-row { display:flex; align-items:center; gap:6px; background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:8px; margin-bottom:6px; font-size:12px; }
-  .pago-row .pr-date { font-family:var(--font-mono); color:var(--text3); }
-  .pago-row .pr-amt  { font-weight:700; font-family:var(--font-mono); color:var(--green); }
-  .pago-row .pr-note { color:var(--text2); flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  /* ── HISTORIAL PAGOS ── */
+  .pagos-title { font-size:12px; font-weight:700; color:var(--text2); margin:12px 0 6px; display:flex; align-items:center; gap:6px; }
+  .pago-row {
+    display:flex; align-items:center; gap:6px; flex-wrap:wrap;
+    background:var(--surface2); border:1px solid var(--border); border-radius:8px;
+    padding:8px 10px; margin-bottom:6px;
+  }
+  .pago-row .pr-tipo { font-size:9px; font-weight:700; padding:2px 6px; border-radius:999px; flex-shrink:0; }
+  .pr-tipo.int   { background:var(--orange-soft); color:var(--orange); }
+  .pr-tipo.parc  { background:#EEE8F8; color:#6B34C2; }
+  .pr-tipo.cap   { background:var(--blue-soft); color:var(--blue); }
+  .pr-tipo.liq   { background:var(--green-soft); color:var(--green); }
+  .pago-row .pr-date { font-family:var(--font-mono); font-size:11px; color:var(--text3); }
+  .pago-row .pr-amt  { font-weight:700; font-family:var(--font-mono); font-size:12px; color:var(--green); }
+  .pago-row .pr-note { color:var(--text2); font-size:11px; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .pago-row .pr-wa { background:transparent; border:none; cursor:pointer; padding:4px; border-radius:6px; color:var(--wa); font-size:16px; line-height:1; flex-shrink:0; }
+  .pago-row .pr-wa:active { background:var(--wa-soft); }
 
-  /* ── EMPTY / TOAST ── */
-  .empty-state { text-align:center; padding:32px 10px; color:var(--text3); }
-  #loadingOverlay { position:fixed; inset:0; z-index:9999; background:rgba(23,32,51,0.96); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; color:#fff; }
+  /* ── EMPTY / LOADING / TOAST ── */
+  .empty-state { text-align:center; padding:32px; color:var(--text3); font-size:13px; }
+  #loadingOverlay {
+    position:fixed; inset:0; z-index:9999; background:rgba(23,32,51,0.96);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; color:#fff;
+    font-family:var(--font-sans);
+  }
   .spinner { width:36px; height:36px; border:3px solid rgba(255,255,255,0.15); border-top-color:#fff; border-radius:50%; animation:spin 0.8s linear infinite; }
   @keyframes spin { to { transform:rotate(360deg); } }
-  
   #toast {
-    position:fixed; bottom:16px; left:16px; right:16px; z-index:9999;
-    background:#172033; color:#fff; padding:12px; border-radius:var(--radius);
-    font-size:12px; text-align:center; opacity:0; transition:all 0.22s; pointer-events:none;
+    position:fixed; bottom:20px; left:16px; right:16px; z-index:9999;
+    background:#172033; color:#fff; padding:12px 16px; border-radius:var(--radius);
+    font-size:13px; text-align:center; opacity:0; transform:translateY(6px);
+    transition:all 0.22s; pointer-events:none; box-shadow: 0 8px 24px rgba(0,0,0,0.2);
   }
-  #toast.show { opacity:1; }
+  #toast.show { opacity:1; transform:translateY(0); }
+  #toast.success { background: #166534; }
+  #toast.error   { background: #991B1B; }
+  #toast.info    { background: #1e40af; }
 </style>
 </head>
 <body>
 
+<!-- LOADING -->
 <div id="loadingOverlay">
   <div class="spinner"></div>
-  <div style="font-size:15px;font-weight:600;">Cargando Control Personal...</div>
-  <div style="font-size:12px;color:rgba(255,255,255,0.5);" id="loadingMsg">Sincronizando base de datos</div>
+  <div style="font-size:15px;font-weight:600;">Control Personal</div>
+  <div style="font-size:12px;color:rgba(255,255,255,0.5);" id="loadingMsg">Conectando con Firebase...</div>
 </div>
 
+<!-- TOPBAR -->
 <div class="topbar">
   <div class="topbar-brand">
     <div class="topbar-logo"><i class="ti ti-coin"></i></div>
     <div>
-      <div class="topbar-name">Control Personal</div>
+      <div class="topbar-name">Mis Préstamos</div>
       <div class="topbar-sub" id="topDate"></div>
     </div>
   </div>
   <div class="topbar-status">
     <div class="status-dot" id="statusDot"></div>
-    <span class="status-label" id="statusLabel">Cargando...</span>
+    <span class="status-label" id="statusLabel">...</span>
   </div>
 </div>
 
 <div class="app">
 
+  <!-- HEADER -->
   <div class="page-header">
-    <div style="width:100%; margin-bottom:8px;">
-      <h1><span class="h-icon"><i class="ti ti-device-mobile"></i></span> Mis Préstamos</h1>
+    <div style="width:100%;margin-bottom:6px;">
+      <h1><span class="h-icon"><i class="ti ti-device-mobile"></i></span> Control Personal</h1>
     </div>
     <div class="header-actions">
       <button class="btn btn-secondary" onclick="exportCSV()"><i class="ti ti-file-spreadsheet"></i> CSV</button>
-      <button class="btn btn-primary" onclick="showForm()"><i class="ti ti-plus"></i> Nuevo préstamo</button>
+      <button class="btn btn-primary" onclick="showForm()"><i class="ti ti-plus"></i> Nuevo Préstamo</button>
     </div>
   </div>
 
+  <!-- STATS -->
   <div class="stats-grid" id="statsGrid"></div>
 
+  <!-- FORM PANEL -->
   <div class="panel" id="formPanel" style="display:none;">
     <div class="panel-title"><i class="ti ti-forms"></i> <span id="formTitle">Nuevo préstamo</span></div>
     <div class="form-grid">
-      <div class="field">
-        <label>Cliente</label>
-        <input type="text" id="fCliente" placeholder="Nombre del deudor" />
+      <div class="field full">
+        <label>Nombre del cliente</label>
+        <input type="text" id="fCliente" placeholder="Nombre completo del deudor" />
       </div>
       <div class="field">
-        <label>Número de WhatsApp</label>
-        <input type="tel" id="fMovil" placeholder="Ej: 51999888777" />
+        <label>WhatsApp <span style="color:var(--text3);font-weight:400">(con código país)</span></label>
+        <input type="tel" id="fMovil" placeholder="51999888777" />
       </div>
       <div class="field">
-        <label>Fecha inicial</label>
+        <label>Fecha del préstamo</label>
         <input type="date" id="fFecha" oninput="calcPreview()" />
       </div>
       <div class="field">
         <label>Monto prestado (S/)</label>
-        <input type="number" id="fMonto" placeholder="0.00" step="0.01" oninput="calcPreview()" />
+        <input type="number" id="fMonto" placeholder="0.00" step="0.01" min="0.01" oninput="calcPreview()" />
       </div>
       <div class="field">
-        <label>Interés Mensual (%)</label>
-        <input type="number" id="fTasa" placeholder="%" step="0.1" oninput="calcPreview()" />
+        <label>Interés mensual (%)</label>
+        <input type="number" id="fTasa" placeholder="Ej: 10" step="0.1" min="0" oninput="calcPreview()" />
       </div>
       <div class="field">
-        <label>Plazo total (días)</label>
-        <input type="number" id="fPlazo" value="30" oninput="calcPreview()" />
+        <label>Plazo (días)</label>
+        <input type="number" id="fPlazo" value="30" min="1" oninput="calcPreview()" />
       </div>
       <div class="field">
         <label>Fecha límite de pago</label>
@@ -321,59 +368,97 @@
       </div>
     </div>
     <div class="calc-bar">
-      <div class="calc-item"><div class="ci-label">Int. Mes</div><div class="ci-val" id="prevInteres">S/ 0</div></div>
-      <div class="calc-item"><div class="ci-label">Int. Día</div><div class="ci-val" id="prevDiario">S/ 0</div></div>
-      <div class="calc-item"><div class="ci-label">Total</div><div class="ci-val green" id="prevTotal">S/ 0</div></div>
+      <div class="calc-item"><div class="ci-label">Int. Mensual</div><div class="ci-val" id="prevInteres">S/ 0.00</div></div>
+      <div class="calc-item"><div class="ci-label">Int. Diario</div><div class="ci-val" id="prevDiario">S/ 0.00</div></div>
+      <div class="calc-item"><div class="ci-label">Total a pagar</div><div class="ci-val green" id="prevTotal">S/ 0.00</div></div>
     </div>
-    <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:14px;">
+    <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:14px;">
       <button class="btn btn-ghost" onclick="hideForm()">Cancelar</button>
       <button class="btn btn-primary" onclick="saveRecord()"><i class="ti ti-device-floppy"></i> Guardar</button>
     </div>
   </div>
 
+  <!-- DETAIL OVERLAY -->
   <div class="detail-overlay" id="detailOverlay"></div>
 
+  <!-- PAYMENT PANEL -->
   <div class="panel" id="paymentPanel" style="display:none;">
-    <div class="panel-title"><i class="ti ti-cash"></i> Cobrar — <span id="pagoClienteNombre" style="color:var(--text2)"></span></div>
+    <div class="panel-title"><i class="ti ti-cash"></i> Cobrar — <span id="pagoClienteNombre" style="color:var(--text2);font-weight:500"></span></div>
     <input type="hidden" id="fPagoId" />
-    <div style="display:flex;gap:6px;margin-bottom:12px;">
-      <button class="pago-tipo-btn active" id="btnTipoIntereses" onclick="setTipoPago('intereses')"><i class="ti ti-refresh"></i>Solo Int.</button>
-      <button class="pago-tipo-btn" id="btnTipoParcial" onclick="setTipoPago('parcial')"><i class="ti ti-calculator"></i>Abono Cap.</button>
-      <button class="pago-tipo-btn" id="btnTipoTotal" onclick="setTipoPago('total')"><i class="ti ti-check"></i>Liquidar</button>
+
+    <!-- 3 tipos de pago -->
+    <div class="tipo-pago-row">
+      <button class="pago-tipo-btn active" id="btnTipoIntereses" onclick="setTipoPago('intereses')">
+        <i class="ti ti-refresh"></i>
+        Solo Int.
+        <small>Capital continúa</small>
+      </button>
+      <button class="pago-tipo-btn" id="btnTipoParcial" onclick="setTipoPago('parcial')">
+        <i class="ti ti-calculator"></i>
+        Int + Cap
+        <small>Abono parcial</small>
+      </button>
+      <button class="pago-tipo-btn" id="btnTipoTotal" onclick="setTipoPago('total')">
+        <i class="ti ti-check"></i>
+        Liquidar
+        <small>Cierra préstamo</small>
+      </button>
     </div>
+
     <div class="form-grid">
       <div class="field">
-        <label>Fecha de hoy</label>
+        <label>Fecha de cobro</label>
         <input type="date" id="fPagoFecha" oninput="recalcPago()" />
       </div>
       <div class="field">
-        <label>Monto Recibido (S/)</label>
-        <input type="number" id="fPagoMonto" step="0.01" oninput="recalcPagoManual()" />
+        <label>Monto recibido (S/)</label>
+        <input type="number" id="fPagoMonto" step="0.01" min="0.01" oninput="recalcPagoManual()" />
       </div>
-      <div class="field">
-        <label>Comentario corto</label>
-        <input type="text" id="fPagoNota" placeholder="Ej: Efectivo, transferencia..." />
+      <div class="field full">
+        <label>Comentario <span style="color:var(--text3);font-weight:400">(opcional)</span></label>
+        <input type="text" id="fPagoNota" placeholder="Efectivo, Yape, transferencia..." />
       </div>
     </div>
+
     <div class="payment-summary">
-      <div><div class="ps-label">Días trans.</div><div class="ps-val" id="pagoDias">0</div></div>
-      <div><div class="ps-label">Int. generado</div><div class="ps-val" id="pagoInteresHoy">S/ 0</div></div>
-      <div><div class="ps-label">Cap. actual</div><div class="ps-val" id="pagoCapital">S/ 0</div></div>
+      <div>
+        <div class="ps-label">Días desde ref.</div>
+        <div class="ps-val" id="pagoDias">0</div>
+      </div>
+      <div>
+        <div class="ps-label">Int. generado</div>
+        <div class="ps-val orange" id="pagoInteresHoy">S/ 0.00</div>
+      </div>
+      <div>
+        <div class="ps-label">Capital actual</div>
+        <div class="ps-val" id="pagoCapital">S/ 0.00</div>
+      </div>
     </div>
-    <div style="font-size:11px;color:var(--text2);margin-top:6px;background:#fff;padding:6px;border-radius:6px;" id="pagoExplicacion"></div>
-    <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:14px;">
-      <button class="btn btn-ghost" onclick="hidePaymentForm()">Cancelar</button>
-      <button class="btn btn-primary" onclick="savePayment()">Procesar Pago</button>
+
+    <div class="explicacion-box" id="pagoExplicacion"></div>
+
+    <!-- Acciones: Guardar + WhatsApp juntos -->
+    <div style="display:flex;flex-direction:column;gap:8px;margin-top:14px;">
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-ghost" onclick="hidePaymentForm()" style="flex:0 0 auto;">Cancelar</button>
+        <button class="btn btn-primary" onclick="savePayment(false)" style="flex:1;justify-content:center;">
+          <i class="ti ti-device-floppy"></i> Guardar pago
+        </button>
+      </div>
+      <button class="btn btn-wa" onclick="savePayment(true)" style="width:100%;justify-content:center;" id="btnGuardarWA">
+        <i class="ti ti-brand-whatsapp"></i> Guardar + Enviar resumen por WhatsApp
+      </button>
     </div>
   </div>
 
+  <!-- TABLE -->
   <div class="panel">
     <div class="filter-row">
-      <input class="search-input" type="text" id="searchInput" placeholder="🔍 Buscar deudor..." oninput="renderTable()" />
+      <input class="search-input" type="text" id="searchInput" placeholder="🔍 Buscar cliente..." oninput="renderTable()" />
       <select class="filter-select" id="filterStatus" onchange="renderTable()">
         <option value="">Todos</option>
         <option value="activo">Activos</option>
-        <option value="por_vencer">Avisos</option>
+        <option value="por_vencer">Aviso</option>
         <option value="vencido">⚠️ Mora</option>
         <option value="pagado">Pagados</option>
       </select>
@@ -383,25 +468,31 @@
         <thead>
           <tr>
             <th>Cliente</th>
-            <th>Monto</th>
+            <th>Capital</th>
             <th>Vence</th>
             <th>Int. Hoy</th>
             <th>Estado</th>
-            <th>Acción</th>
+            <th>Acc.</th>
           </tr>
         </thead>
         <tbody id="tableBody"></tbody>
       </table>
-      <div class="empty-state" id="emptyState" style="display:none;">No se encontraron registros</div>
+      <div class="empty-state" id="emptyState" style="display:none;">
+        <i class="ti ti-clipboard-off" style="font-size:28px;margin-bottom:6px;display:block;"></i>
+        Sin registros
+      </div>
     </div>
   </div>
 </div>
 
 <div id="toast"></div>
 
+<!-- ── FIREBASE MODULE ── -->
 <script type="module">
   import { initializeApp }    from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getFirestore, collection, onSnapshot, doc, addDoc, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+  import { getFirestore, collection, onSnapshot,
+           doc, setDoc, deleteDoc }
+    from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey:            "AIzaSyCBDkCLZAsqWNNc3j_uuOzDiQct14H3ioY",
@@ -416,330 +507,623 @@
   const db  = getFirestore(app);
   const COL = "prestamos";
 
-  window._fsWrite = async (record) => { await setDoc(doc(db, COL, record.id), record); };
+  // Serializar: strip undefined para Firestore
+  const clean = obj => JSON.parse(JSON.stringify(obj));
+
+  window._fsWrite  = async (r) => { await setDoc(doc(db, COL, r.id), clean(r)); };
   window._fsDelete = async (id) => { await deleteDoc(doc(db, COL, id)); };
 
-  onSnapshot(collection(db, COL), (snapshot) => {
-    window._records = snapshot.docs.map(d => {
+  onSnapshot(collection(db, COL), snap => {
+    records = snap.docs.map(d => {
       const data = d.data();
-      return { id: d.id, ...data, pagos: data.pagos || [] };
+      return {
+        id:        d.id,
+        cliente:   data.cliente   || '',
+        movil:     data.movil     || '',
+        fecha:     data.fecha     || '',
+        monto:     Number(data.monto) || 0,
+        montoOriginal: Number(data.montoOriginal || data.monto) || 0,
+        tasa:      Number(data.tasa)  || 0,
+        plazo:     Number(data.plazo) || 30,
+        fechaPago: data.fechaPago || '',
+        pagado:    !!data.pagado,
+        pagos:     Array.isArray(data.pagos) ? data.pagos : [],
+      };
     });
-    records = window._records;
     renderAll();
     document.getElementById('loadingOverlay').style.display = 'none';
-    document.getElementById('statusDot').className = 'status-dot online';
+    document.getElementById('statusDot').className   = 'status-dot online';
     document.getElementById('statusLabel').textContent = 'Sincronizado';
-  }, (err) => {
-    document.getElementById('statusDot').className = 'status-dot offline';
-    document.getElementById('statusLabel').textContent = 'Desconectado';
+  }, err => {
+    console.error(err);
+    document.getElementById('statusDot').className   = 'status-dot offline';
+    document.getElementById('statusLabel').textContent = 'Sin conexión';
+    document.getElementById('loadingMsg').textContent  = 'Error: ' + err.message;
   });
 </script>
 
+<!-- ── APP LOGIC ── -->
 <script>
-let records = [];
+/* ═══════════════ ESTADO GLOBAL ═══════════════ */
+let records   = [];
 let editingId = null;
-let tipoPago = 'intereses';
+let tipoPago  = 'intereses';
 
+/* ═══════════════ HELPERS ═══════════════ */
 function today() {
   const d = new Date();
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 }
 function fmtDate(d) { return d ? d.split('-').reverse().join('/') : '—'; }
-function fmtCurrency(n) { return 'S/ ' + Number(n||0).toFixed(1); }
-function escHtml(v) { return String(v||''); }
+// FIX: .toFixed(2) para centavos correctos
+function fmtCurrency(n) { return 'S/ ' + Number(n||0).toFixed(2); }
+// FIX: escape HTML real para prevenir XSS
+function escHtml(v) {
+  return String(v||'').replace(/[&<>'"]/g, c =>
+    ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])
+  );
+}
 function daysDiff(a, b) {
   if (!a || !b) return 0;
   return Math.round((new Date(b+'T00:00:00') - new Date(a+'T00:00:00')) / 86400000) || 0;
 }
 function addDays(dateStr, n) {
   if (!dateStr) return '';
-  const d = new Date(dateStr + 'T00:00:00');
+  const d = new Date(dateStr+'T00:00:00');
   d.setDate(d.getDate() + n);
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 }
+function createId() { return Date.now().toString(36) + Math.random().toString(36).slice(2); }
 
+/* ═══════════════ LÓGICA DE CAPITAL E INTERESES ═══════════════ */
+// Fecha de referencia = último pago de intereses o parcial, o fecha inicial
 function getFechaRef(r) {
   const v = (r.pagos||[]).filter(p => p.tipo === 'intereses' || p.tipo === 'parcial');
-  return v.length > 0 ? v[v.length-1].fecha : r.fecha;
+  return v.length ? v[v.length-1].fecha : r.fecha;
 }
-function getInteresHasta(r, f) {
-  const diario = r.monto * (r.tasa / 100) / 30;
-  return diario * Math.max(0, daysDiff(getFechaRef(r), f));
+
+// FIX: capital pendiente real = montoOriginal - suma de abonos a capital de pagos parciales
+function getCapitalPendiente(r) {
+  const montoOrig = r.montoOriginal || r.monto;
+  const abonosCapital = (r.pagos||[])
+    .filter(p => p.tipo === 'parcial' || p.tipo === 'total')
+    .reduce((s, p) => s + (Number(p.capitalAmortizado)||0), 0);
+  return Math.max(0, montoOrig - abonosCapital);
 }
-function getTotalCobrado(r) { return (r.pagos||[]).reduce((s, p) => s + (Number(p.monto)||0), 0); }
-function isCanceled(r) { return r.pagado || (r.pagos||[]).some(p => p.tipo === 'total'); }
+
+// FIX: interés calculado sobre el capital PENDIENTE actual, no el original
+function getInteresHasta(r, fechaHasta) {
+  const capital = getCapitalPendiente(r);
+  const diario  = capital * (r.tasa / 100) / 30;
+  return diario * Math.max(0, daysDiff(getFechaRef(r), fechaHasta));
+}
+
+function getTotalCobrado(r) {
+  return (r.pagos||[]).reduce((s, p) => s + (Number(p.monto)||0), 0);
+}
+
+function isCanceled(r) {
+  return r.pagado || (r.pagos||[]).some(p => p.tipo === 'total');
+}
 
 function calcStatus(r) {
   if (isCanceled(r)) return 'pagado';
   const d = daysDiff(today(), r.fechaPago);
-  if (d < 0) return 'vencido';
+  if (d < 0)  return 'vencido';
   if (d <= 3) return 'por_vencer';
   return 'activo';
 }
-
 const STATUS_LABEL = { activo:'Activo', pagado:'Pagado', vencido:'Mora', por_vencer:'Aviso' };
 const STATUS_CLASS = { activo:'badge-active', pagado:'badge-paid', vencido:'badge-late', por_vencer:'badge-due' };
+const TIPO_LABEL   = { intereses:'INT', parcial:'INT+CAP', capital:'CAP', total:'LIQUID.' };
+const TIPO_CLASS   = { intereses:'int', parcial:'parc', capital:'cap', total:'liq' };
 
-function toast(msg) {
+/* ═══════════════ TOAST ═══════════════ */
+let _toastT;
+function toast(msg, type='') {
   const el = document.getElementById('toast');
-  el.textContent = msg; el.className = 'show';
-  setTimeout(() => el.className = '', 2000);
+  el.textContent = msg;
+  el.className = 'show' + (type ? ' '+type : '');
+  clearTimeout(_toastT);
+  _toastT = setTimeout(() => el.className = '', 2400);
 }
 
-// FORMATO DE ALERTA DE DIAS VENCIDOS E INTERESES DIARIOS POR WHATSAPP
-function dispararRecordatorioMora(id) {
-  const r = records.find(x => x.id === id); if (!r || !r.movil) return;
-  const num = r.movil.replace(/\D/g, '');
-  const ref = getFechaRef(r);
-  const dias = Math.max(0, daysDiff(ref, today()));
-  const diario = r.monto * (r.tasa / 100) / 30;
-  const acum = diario * dias;
-
-  let txt = `*CONTROL PERSONAL — AVISO DE MORA*\n\n`;
-  txt += `Hola *${r.cliente}*, te informamos el cálculo de intereses devengados al día de hoy:\n\n`;
-  txt += `📉 *Capital Restante:* ${fmtCurrency(r.monto)}\n`;
-  txt += `⏳ *Días transcurridos:* ${dias} días de retraso\n`;
-  txt += `💵 *Interés por día:* ${fmtCurrency(diario)}\n`;
-  txt += `⚠️ *Total Intereses hoy:* ${fmtCurrency(acum)}\n\n`;
-  txt += `Por favor, sírvase abonar para frenar la acumulación diaria. ¡Muchas gracias!`;
-
-  window.open(`https://api.whatsapp.com/send?phone=${num}&text=${encodeURIComponent(txt)}`, '_blank');
+/* ═══════════════ WHATSAPP ═══════════════ */
+function buildMsgPago(r, { tipo, monto, interes, capitalAmortizado, capitalDespues, fecha, nuevaFecha }) {
+  const tipoTexto = {
+    intereses: 'Pago de intereses',
+    parcial:   'Abono parcial (int. + capital)',
+    total:     'Liquidación total del préstamo',
+  };
+  const lineas = [
+    `✅ *CONFIRMACIÓN DE PAGO*`,
+    ``,
+    `👤 *Cliente:* ${r.cliente}`,
+    `📅 *Fecha:* ${fmtDate(fecha)}`,
+    `💳 *Tipo:* ${tipoTexto[tipo] || tipo}`,
+    `━━━━━━━━━━━━━━━━━`,
+  ];
+  if (interes > 0)           lineas.push(`📊 Intereses cobrados: ${fmtCurrency(interes)}`);
+  if (capitalAmortizado > 0) lineas.push(`🏦 Abono al capital:   ${fmtCurrency(capitalAmortizado)}`);
+  lineas.push(`💵 *Total recibido: ${fmtCurrency(monto)}*`);
+  lineas.push(`━━━━━━━━━━━━━━━━━`);
+  if (tipo !== 'total') {
+    lineas.push(`📌 Capital pendiente: ${fmtCurrency(capitalDespues)}`);
+    if (nuevaFecha) lineas.push(`📆 Próximo pago: ${fmtDate(nuevaFecha)}`);
+  } else {
+    lineas.push(`🎉 Préstamo *cancelado completamente*. ¡Gracias!`);
+  }
+  lineas.push(``, `_Muchas gracias por su pago puntual_ 🙏`);
+  return lineas.join('\n');
 }
 
+function buildMsgMora(r) {
+  const capital = getCapitalPendiente(r);
+  const diario  = capital * (r.tasa / 100) / 30;
+  const dias    = Math.max(0, daysDiff(getFechaRef(r), today()));
+  const acum    = diario * dias;
+  return [
+    `⚠️ *AVISO DE MORA — CONTROL PERSONAL*`,
+    ``,
+    `Hola *${r.cliente}*, te informamos el estado de tu préstamo:`,
+    ``,
+    `💰 Capital pendiente: ${fmtCurrency(capital)}`,
+    `⏳ Días transcurridos: ${dias} días`,
+    `📈 Interés diario: ${fmtCurrency(diario)}`,
+    `🔴 *Total intereses acumulados: ${fmtCurrency(acum)}*`,
+    ``,
+    `Por favor comuníquese para coordinar el pago. ¡Gracias!`,
+  ].join('\n');
+}
+
+function abrirWA(movil, msg) {
+  const num = String(movil||'').replace(/\D/g, '');
+  if (!num) { toast('No hay número de WhatsApp registrado', 'error'); return; }
+  window.open(`https://wa.me/${num}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+/* ═══════════════ FORMULARIO PRÉSTAMO ═══════════════ */
 function showForm(id) {
   editingId = id || null;
+  document.getElementById('formTitle').textContent = id ? 'Editar préstamo' : 'Nuevo préstamo';
   hidePaymentForm(); closeDetail();
   if (id) {
     const r = records.find(x => x.id === id);
     if (r) {
-      document.getElementById('fCliente').value = r.cliente;
-      document.getElementById('fMovil').value = r.movil || '';
-      document.getElementById('fFecha').value = r.fecha;
-      document.getElementById('fMonto').value = r.monto;
-      document.getElementById('fTasa').value = r.tasa;
-      document.getElementById('fPlazo').value = r.plazo;
+      document.getElementById('fCliente').value   = r.cliente;
+      document.getElementById('fMovil').value     = r.movil || '';
+      document.getElementById('fFecha').value     = r.fecha;
+      document.getElementById('fMonto').value     = r.montoOriginal || r.monto;
+      document.getElementById('fTasa').value      = r.tasa;
+      document.getElementById('fPlazo').value     = r.plazo;
       document.getElementById('fFechaPago').value = r.fechaPago;
     }
   } else {
-    document.getElementById('fCliente').value = '';
-    document.getElementById('fMovil').value = '';
-    document.getElementById('fMonto').value = '';
-    document.getElementById('fTasa').value = '';
-    document.getElementById('fFecha').value = today();
-    document.getElementById('fPlazo').value = '30';
+    ['fCliente','fMovil','fMonto','fTasa'].forEach(i => document.getElementById(i).value = '');
+    ['fCliente','fMonto','fTasa','fFechaPago'].forEach(i => document.getElementById(i).classList.remove('invalid'));
+    document.getElementById('fFecha').value     = today();
+    document.getElementById('fPlazo').value     = '30';
     document.getElementById('fFechaPago').value = addDays(today(), 30);
   }
   calcPreview();
-  document.getElementById('formPanel').style.display = 'block';
-  document.getElementById('formPanel').scrollIntoView({ behavior:'smooth' });
+  const fp = document.getElementById('formPanel');
+  fp.style.display = 'block';
+  fp.scrollIntoView({ behavior:'smooth', block:'start' });
 }
-function hideForm() { document.getElementById('formPanel').style.display = 'none'; editingId = null; }
+
+function hideForm() {
+  document.getElementById('formPanel').style.display = 'none';
+  editingId = null;
+}
 
 function calcPreview() {
   const m = parseFloat(document.getElementById('fMonto').value) || 0;
-  const t = parseFloat(document.getElementById('fTasa').value) || 0;
-  const p = parseInt(document.getElementById('fPlazo').value) || 30;
-  document.getElementById('prevInteres').textContent = fmtCurrency(m * (t/100));
-  document.getElementById('prevDiario').textContent = fmtCurrency((m * (t/100)) / 30);
-  document.getElementById('prevTotal').textContent = fmtCurrency(m + (m * (t/100)));
-  if (!editingId && document.getElementById('fFecha').value) {
+  const t = parseFloat(document.getElementById('fTasa').value)  || 0;
+  const p = parseInt(document.getElementById('fPlazo').value)   || 30;
+  const intMes = m * (t / 100);
+  document.getElementById('prevInteres').textContent = fmtCurrency(intMes);
+  document.getElementById('prevDiario').textContent  = fmtCurrency(intMes / 30);
+  document.getElementById('prevTotal').textContent   = fmtCurrency(m + intMes);
+  if (!editingId && document.getElementById('fFecha').value)
     document.getElementById('fFechaPago').value = addDays(document.getElementById('fFecha').value, p);
-  }
 }
 
 async function saveRecord() {
-  const c = document.getElementById('fCliente').value.trim();
-  const m = document.getElementById('fMovil').value.trim();
-  const f = document.getElementById('fFecha').value;
-  const mo = parseFloat(document.getElementById('fMonto').value) || 0;
-  const ta = parseFloat(document.getElementById('fTasa').value) || 0;
-  const pl = parseInt(document.getElementById('fPlazo').value) || 30;
-  const fp = document.getElementById('fFechaPago').value;
+  const cliente = document.getElementById('fCliente').value.trim();
+  const movil   = document.getElementById('fMovil').value.trim();
+  const fecha   = document.getElementById('fFecha').value;
+  const monto   = parseFloat(document.getElementById('fMonto').value) || 0;
+  const tasa    = parseFloat(document.getElementById('fTasa').value)  || 0;
+  const plazo   = parseInt(document.getElementById('fPlazo').value)   || 30;
+  const fechaPago = document.getElementById('fFechaPago').value;
 
-  if(!c || !f || mo <= 0 || !fp) { toast('Por favor llene todos los campos'); return; }
+  // Validación visual
+  let ok = true;
+  [['fCliente', cliente], ['fMonto', monto > 0], ['fFechaPago', !!fechaPago]].forEach(([id, pass]) => {
+    const el = document.getElementById(id);
+    el.classList.toggle('invalid', !pass);
+    if (!pass) ok = false;
+  });
+  if (!ok) { toast('Completa los campos requeridos', 'error'); return; }
+  if (!window._fsWrite) { toast('Firebase no conectado', 'error'); return; }
 
-  const data = {
-    id: editingId || (Date.now().toString(36) + Math.random().toString(36).slice(2)),
-    cliente: c, movil: m, fecha: f, monto: mo, tasa: ta, plazo: pl, fechaPago: fp,
-    pagado: editingId ? records.find(x=>x.id===editingId).pagado : false,
-    pagos: editingId ? records.find(x=>x.id===editingId).pagos : []
-  };
-
-  await window._fsWrite(data);
-  toast('Guardado con éxito');
-  hideForm();
+  try {
+    if (editingId) {
+      const r = records.find(x => x.id === editingId);
+      await window._fsWrite({ ...r, cliente, movil, fecha, monto, montoOriginal: r.montoOriginal||monto, tasa, plazo, fechaPago });
+      toast('Préstamo actualizado', 'success');
+    } else {
+      const id = createId();
+      await window._fsWrite({ id, cliente, movil, fecha, monto, montoOriginal: monto, tasa, plazo, fechaPago, pagado:false, pagos:[] });
+      toast('Préstamo guardado ✓', 'success');
+    }
+    hideForm();
+  } catch(e) { toast('Error al guardar: '+e.message, 'error'); }
 }
 
+/* ═══════════════ FORMULARIO PAGO ═══════════════ */
 function showPaymentForm(id) {
   const r = records.find(x => x.id === id); if (!r) return;
-  tipoPago = 'intereses';
-  document.getElementById('fPagoId').value = id;
+  document.getElementById('fPagoId').value   = id;
   document.getElementById('fPagoFecha').value = today();
-  document.getElementById('fPagoNota').value = '';
+  document.getElementById('fPagoNota').value  = '';
   document.getElementById('pagoClienteNombre').textContent = r.cliente;
+  // Mostrar/ocultar botón WA según si tiene móvil
+  document.getElementById('btnGuardarWA').style.display = r.movil ? '' : 'none';
   setTipoPago('intereses');
-  document.getElementById('paymentPanel').style.display = 'block';
-  document.getElementById('paymentPanel').scrollIntoView({ behavior:'smooth' });
+  const pp = document.getElementById('paymentPanel');
+  pp.style.display = 'block';
+  pp.scrollIntoView({ behavior:'smooth', block:'start' });
 }
 function hidePaymentForm() { document.getElementById('paymentPanel').style.display = 'none'; }
 
 function setTipoPago(t) {
   tipoPago = t;
-  ['btnTipoIntereses','btnTipoParcial','btnTipoTotal'].forEach(b => document.getElementById(b).classList.remove('active'));
-  if(t==='intereses') document.getElementById('btnTipoIntereses').classList.add('active');
-  if(t==='parcial') document.getElementById('btnTipoParcial').classList.add('active');
-  if(t==='total') document.getElementById('btnTipoTotal').classList.add('active');
+  ['btnTipoIntereses','btnTipoParcial','btnTipoTotal'].forEach(b =>
+    document.getElementById(b).classList.remove('active')
+  );
+  const map = { intereses:'btnTipoIntereses', parcial:'btnTipoParcial', total:'btnTipoTotal' };
+  if (map[t]) document.getElementById(map[t]).classList.add('active');
   recalcPago();
 }
 
 function recalcPago() {
-  const r = records.find(x => x.id === document.getElementById('fPagoId').value); if(!r) return;
-  const f = document.getElementById('fPagoFecha').value || today();
-  const d = Math.max(0, daysDiff(getFechaRef(r), f));
-  const intHoy = (r.monto * (r.tasa/100) / 30) * d;
+  const id = document.getElementById('fPagoId').value;
+  const r  = records.find(x => x.id === id); if (!r) return;
+  const f  = document.getElementById('fPagoFecha').value || today();
+  const capital  = getCapitalPendiente(r);
+  const diario   = capital * (r.tasa / 100) / 30;
+  const dias     = Math.max(0, daysDiff(getFechaRef(r), f));
+  const intHoy   = diario * dias;
 
-  document.getElementById('pagoDias').textContent = d + ' días';
+  document.getElementById('pagoDias').textContent       = dias + ' días';
   document.getElementById('pagoInteresHoy').textContent = fmtCurrency(intHoy);
-  document.getElementById('pagoCapital').textContent = fmtCurrency(r.monto);
+  document.getElementById('pagoCapital').textContent    = fmtCurrency(capital);
+
+  const expl = document.getElementById('pagoExplicacion');
 
   if (tipoPago === 'intereses') {
     document.getElementById('fPagoMonto').value = intHoy.toFixed(2);
-    document.getElementById('pagoExplicacion').innerHTML = `Cobro de intereses devengados. El capital sigue congelado.`;
+    expl.className = 'explicacion-box';
+    expl.innerHTML = `<strong>Solo intereses:</strong> cobras ${fmtCurrency(intHoy)} por ${dias} días (${fmtCurrency(diario)}/día). Capital ${fmtCurrency(capital)} continúa congelado.`;
+
   } else if (tipoPago === 'total') {
-    document.getElementById('fPagoMonto').value = (r.monto + intHoy).toFixed(2);
-    document.getElementById('pagoExplicacion').innerHTML = `Liquidación final del préstamo.`;
-  } else {
-    document.getElementById('fPagoMonto').value = (intHoy + 50).toFixed(2);
+    const total = capital + intHoy;
+    document.getElementById('fPagoMonto').value = total.toFixed(2);
+    expl.className = 'explicacion-box';
+    expl.innerHTML = `<strong>Liquidación total:</strong> intereses ${fmtCurrency(intHoy)} + capital ${fmtCurrency(capital)} = <strong>${fmtCurrency(total)}</strong>. Préstamo se cierra.`;
+
+  } else { // parcial
+    // Sugerir interés + 10% del capital como abono inicial
+    const sugerido = intHoy + Math.round(capital * 0.1 * 100) / 100; // int + 10% capital
+    document.getElementById('fPagoMonto').value = sugerido.toFixed(2);
     recalcPagoManual();
   }
 }
 
 function recalcPagoManual() {
   if (tipoPago !== 'parcial') return;
-  const r = records.find(x => x.id === document.getElementById('fPagoId').value); if(!r) return;
-  const d = Math.max(0, daysDiff(getFechaRef(r), document.getElementById('fPagoFecha').value));
-  const intHoy = (r.monto * (r.tasa/100) / 30) * d;
-  const mi = parseFloat(document.getElementById('fPagoMonto').value) || 0;
-  
-  if(mi < intHoy) {
-    document.getElementById('pagoExplicacion').innerHTML = `<span style="color:var(--red)">No cubre el interés generado de ${fmtCurrency(intHoy)}</span>`;
-  } else {
-    document.getElementById('pagoExplicacion').innerHTML = `Amortiza ${fmtCurrency(mi - intHoy)} al capital principal.`;
-  }
-}
-
-async function savePayment() {
   const id = document.getElementById('fPagoId').value;
-  const r = records.find(x => x.id === id);
-  const f = document.getElementById('fPagoFecha').value;
-  const m = parseFloat(document.getElementById('fPagoMonto').value) || 0;
-  const n = document.getElementById('fPagoNota').value;
+  const r  = records.find(x => x.id === id); if (!r) return;
+  const f  = document.getElementById('fPagoFecha').value || today();
+  const capital = getCapitalPendiente(r);
+  const diario  = capital * (r.tasa / 100) / 30;
+  const dias    = Math.max(0, daysDiff(getFechaRef(r), f));
+  const intHoy  = diario * dias;
+  const mi      = parseFloat(document.getElementById('fPagoMonto').value) || 0;
+  const expl    = document.getElementById('pagoExplicacion');
 
-  const intHoy = (r.monto * (r.tasa/100) / 30) * Math.max(0, daysDiff(getFechaRef(r), f));
-  const pList = [...r.pagos];
-
-  if(tipoPago === 'intereses') {
-    pList.push({ fecha: f, monto: m, nota: n || 'Intereses', tipo: 'intereses' });
-    await window._fsWrite({ ...r, pagos: pList, fechaPago: addDays(f, r.plazo) });
-  } else if(tipoPago === 'total') {
-    pList.push({ fecha: f, monto: m, nota: n || 'Liquidación', tipo: 'total' });
-    await window._fsWrite({ ...r, pagos: pList, pagado: true });
+  if (mi < intHoy) {
+    expl.className = 'explicacion-box warn';
+    expl.innerHTML = `⚠️ Monto insuficiente. El interés generado es ${fmtCurrency(intHoy)}. Debes cubrir al menos los intereses.`;
   } else {
-    if(m < intHoy) { toast('Monto insuficiente'); return; }
-    const am = m - intHoy;
-    pList.push({ fecha: f, monto: m, nota: n || 'Abono parcial', tipo: 'parcial', capitalAmortizado: am });
-    await window._fsWrite({ ...r, monto: Math.max(0, r.monto - am), pagos: pList, fechaPago: addDays(f, r.plazo), pagado: (r.monto - am <= 0) });
+    const abono = mi - intHoy;
+    const capitalDespues = Math.max(0, capital - abono);
+    expl.className = 'explicacion-box';
+    expl.innerHTML = `<strong>Abono parcial:</strong> ${fmtCurrency(intHoy)} intereses + ${fmtCurrency(abono)} al capital. Capital quedará en <strong>${fmtCurrency(capitalDespues)}</strong>.`;
   }
-  toast('Pago registrado con éxito');
-  hidePaymentForm();
 }
 
+async function savePayment(enviarWA = false) {
+  const id    = document.getElementById('fPagoId').value;
+  const r     = records.find(x => x.id === id); if (!r) return;
+  const f     = document.getElementById('fPagoFecha').value;
+  const m     = parseFloat(document.getElementById('fPagoMonto').value) || 0;
+  const nota  = document.getElementById('fPagoNota').value.trim();
+  if (!f || m <= 0) { toast('Fecha y monto son requeridos', 'error'); return; }
+  if (!window._fsWrite) { toast('Firebase no conectado', 'error'); return; }
+
+  const capital  = getCapitalPendiente(r);
+  const diario   = capital * (r.tasa / 100) / 30;
+  const dias     = Math.max(0, daysDiff(getFechaRef(r), f));
+  const intHoy   = diario * dias;
+  const pList    = [...(r.pagos||[])];
+  let updated, msgInfo = { tipo: tipoPago, monto: m, fecha: f, interes: 0, capitalAmortizado: 0 };
+
+  try {
+    if (tipoPago === 'intereses') {
+      const nuevaFecha = addDays(f, r.plazo);
+      pList.push({ fecha:f, monto:m, nota:nota||'Pago de intereses', tipo:'intereses' });
+      updated = { ...r, pagos:pList, fechaPago:nuevaFecha };
+      msgInfo = { ...msgInfo, interes:m, capitalDespues:capital, nuevaFecha };
+
+    } else if (tipoPago === 'total') {
+      pList.push({ fecha:f, monto:m, nota:nota||'Liquidación total', tipo:'total', capitalAmortizado:capital });
+      updated = { ...r, pagos:pList, pagado:true };
+      msgInfo = { ...msgInfo, interes:intHoy, capitalAmortizado:capital, capitalDespues:0 };
+
+    } else { // parcial
+      if (m < intHoy) { toast('El monto no cubre los intereses generados', 'error'); return; }
+      const abono = m - intHoy;
+      const capitalDespues = Math.max(0, capital - abono);
+      const nuevaFecha = addDays(f, r.plazo);
+      // FIX: guardamos capitalAmortizado correctamente, NO modificamos r.monto
+      pList.push({ fecha:f, monto:m, nota:nota||'Abono parcial', tipo:'parcial', capitalAmortizado:abono });
+      updated = {
+        ...r,
+        pagos: pList,
+        pagado: capitalDespues <= 0,
+        fechaPago: nuevaFecha
+        // monto y montoOriginal NO se tocan — el capital se calcula dinámicamente
+      };
+      msgInfo = { ...msgInfo, interes:intHoy, capitalAmortizado:abono, capitalDespues, nuevaFecha };
+    }
+
+    await window._fsWrite(updated);
+    toast('Pago registrado ✓', 'success');
+
+    if (enviarWA && r.movil) {
+      const msg = buildMsgPago(r, msgInfo);
+      abrirWA(r.movil, msg);
+    } else if (enviarWA && !r.movil) {
+      toast('Sin número de WhatsApp registrado', 'error');
+    }
+
+    hidePaymentForm();
+    showDetail(id);
+  } catch(e) {
+    toast('Error: ' + e.message, 'error');
+  }
+}
+
+/* ═══════════════ DETALLE ═══════════════ */
 function showDetail(id) {
   const r = records.find(x => x.id === id); if (!r) return;
-  const s = calcStatus(r);
-  const d = Math.max(0, daysDiff(getFechaRef(r), today()));
-  const intAcum = (r.monto * (r.tasa/100) / 30) * d;
+  const s        = calcStatus(r);
+  const capital  = getCapitalPendiente(r);
+  const diario   = capital * (r.tasa / 100) / 30;
+  const ref      = getFechaRef(r);
+  const diasRef  = Math.max(0, daysDiff(ref, today()));
+  const diasTot  = Math.max(0, daysDiff(r.fecha, today()));
+  const diasRest = daysDiff(today(), r.fechaPago);
+  const intAcum  = diario * diasRef;
+  const cobrado  = getTotalCobrado(r);
+  const pct      = Math.min(100, Math.max(0, Math.round((diasTot / (r.plazo||30)) * 100)));
+
+  const pagosHtml = (r.pagos||[]).length
+    ? (r.pagos||[]).map((p, i) => {
+        const tc = TIPO_CLASS[p.tipo] || 'int';
+        const tl = TIPO_LABEL[p.tipo] || p.tipo;
+        const waBtn = r.movil
+          ? `<button class="pr-wa" onclick="reenviarPagoWA('${r.id}',${i})" title="Reenviar por WhatsApp"><i class="ti ti-brand-whatsapp"></i></button>`
+          : '';
+        return `<div class="pago-row">
+          <span class="pr-tipo ${tc}">${tl}</span>
+          <span class="pr-date">${fmtDate(p.fecha)}</span>
+          <span class="pr-amt">${fmtCurrency(p.monto)}</span>
+          <span class="pr-note">${p.nota ? '· '+escHtml(p.nota) : ''}</span>
+          ${waBtn}
+        </div>`;
+      }).join('')
+    : `<div style="font-size:12px;color:var(--text3);padding:8px 0">Sin pagos registrados aún</div>`;
 
   document.getElementById('detailOverlay').innerHTML = `
     <div class="detail-card">
       <div class="detail-header">
         <div>
           <div class="detail-name">${escHtml(r.cliente)}</div>
-          <div style="font-size:12px;color:var(--text2);margin-top:2px;">📱 ${r.movil || 'Sin número'}</div>
-          <div style="margin-top:6px;"><span class="badge ${STATUS_CLASS[s]}">${STATUS_LABEL[s]}</span></div>
+          <div style="font-size:12px;color:var(--text2);margin-top:3px;">
+            ${r.movil
+              ? `<i class="ti ti-brand-whatsapp" style="color:var(--wa)"></i> ${escHtml(r.movil)}`
+              : `<i class="ti ti-phone-off" style="color:var(--text3)"></i> Sin número`}
+          </div>
+          <div style="margin-top:6px;display:flex;gap:6px;align-items:center;">
+            <span class="badge ${STATUS_CLASS[s]}">${STATUS_LABEL[s]}</span>
+            ${s==='vencido' ? `<span style="font-size:11px;color:var(--red);font-weight:700">${Math.abs(diasRest)} días en mora</span>` : ''}
+          </div>
         </div>
         <button class="btn-icon" onclick="closeDetail()"><i class="ti ti-x"></i></button>
       </div>
+
+      <!-- Resumen numérico -->
       <div class="detail-grid">
-        <div class="detail-item"><div class="di-label">Capital Actual</div><div class="di-val">${fmtCurrency(r.monto)}</div></div>
-        <div class="detail-item"><div class="di-label">Int. Acumulado</div><div class="di-val orange">${fmtCurrency(intAcum)}</div></div>
-        <div class="detail-item"><div class="di-label">Vencimiento</div><div class="di-val">${fmtDate(r.fechaPago)}</div></div>
-        <div class="detail-item"><div class="di-label">Total Cobrado</div><div class="di-val green">${fmtCurrency(getTotalCobrado(r))}</div></div>
+        <div class="detail-item">
+          <div class="di-label">Capital pendiente</div>
+          <div class="di-val">${fmtCurrency(capital)}</div>
+        </div>
+        <div class="detail-item">
+          <div class="di-label">Int. mensual</div>
+          <div class="di-val">${fmtCurrency(capital*(r.tasa/100))}</div>
+        </div>
+        <div class="detail-item">
+          <div class="di-label">Int. diario</div>
+          <div class="di-val">${fmtCurrency(diario)}</div>
+        </div>
+        <div class="detail-item">
+          <div class="di-label">Total cobrado</div>
+          <div class="di-val green">${fmtCurrency(cobrado)}</div>
+        </div>
       </div>
+
+      <!-- Caja intereses a cobrar HOY -->
+      ${!isCanceled(r) ? `
+      <div class="int-hoy-box">
+        <div>
+          <div class="ihl">⏱ Intereses a cobrar hoy (${diasRef} días)</div>
+          <div class="ihv">${fmtCurrency(intAcum)}</div>
+          <div class="ihs">Desde: ${fmtDate(ref)} → Hoy · ${fmtCurrency(diario)}/día</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="ihl">Capital activo</div>
+          <div style="font-size:16px;font-weight:700;color:var(--accent);font-family:var(--font-mono);">${fmtCurrency(capital)}</div>
+          <div class="ihs">Próx. vence: ${fmtDate(r.fechaPago)}</div>
+        </div>
+      </div>` : ''}
+
+      <!-- Barra de progreso -->
+      <div class="progress-bg"><div class="progress-fill" style="width:${pct}%"></div></div>
+      <div class="progress-labels">
+        <span>${pct}% del plazo (${diasTot}/${r.plazo||30} días)</span>
+        <span>${diasRest>=0 ? diasRest+' días restantes' : Math.abs(diasRest)+' días vencido'}</span>
+      </div>
+
+      <!-- Acciones -->
       <div class="detail-actions">
         ${!isCanceled(r) ? `
-          <button class="btn btn-info" onclick="showPaymentForm('${r.id}')"><i class="ti ti-cash"></i> Cobrar / Abonar</button>
-          ${r.movil ? `<button class="btn btn-success" style="background:#22C55E;color:#fff;" onclick="dispararRecordatorioMora('${r.id}')"><i class="ti ti-brand-whatsapp"></i> Cobrar por WhatsApp</button>` : ''}
-        ` : ''}
-        <button class="btn btn-secondary" onclick="showForm('${r.id}')"><i class="ti ti-edit"></i> Editar Datos</button>
-        <button class="btn btn-danger-soft" onclick="deleteRecord('${r.id}')"><i class="ti ti-trash"></i> Eliminar Registro</button>
+          <button class="btn btn-info" onclick="showPaymentForm('${r.id}')">
+            <i class="ti ti-cash"></i> Cobrar / Abonar
+          </button>
+          ${r.movil ? `
+          <button class="btn btn-wa" onclick="abrirWA('${escHtml(r.movil)}', buildMsgMora(records.find(x=>x.id==='${r.id}')))">
+            <i class="ti ti-brand-whatsapp"></i> Enviar aviso de mora
+          </button>` : ''}
+        ` : `
+          <button class="btn btn-success" onclick="reabrirPrestamo('${r.id}')">
+            <i class="ti ti-refresh"></i> Reabrir préstamo
+          </button>
+        `}
+        <button class="btn btn-secondary" onclick="showForm('${r.id}')">
+          <i class="ti ti-edit"></i> Editar datos
+        </button>
+        <button class="btn btn-danger-soft" onclick="deleteRecord('${r.id}')">
+          <i class="ti ti-trash"></i> Eliminar registro
+        </button>
       </div>
+
+      <!-- Historial de pagos -->
+      <div class="pagos-title"><i class="ti ti-list-check"></i> Historial de pagos (${(r.pagos||[]).length})</div>
+      ${pagosHtml}
     </div>
   `;
   document.getElementById('detailOverlay').classList.add('show');
+  document.getElementById('detailOverlay').scrollIntoView({ behavior:'smooth', block:'start' });
 }
 function closeDetail() { document.getElementById('detailOverlay').classList.remove('show'); }
 
-async function deleteRecord(id) {
-  if(confirm('¿Eliminar definitivamente de Firebase?')) {
-    await window._fsDelete(id); toast('Eliminado'); closeDetail();
-  }
+// Reenviar mensaje de confirmación de un pago ya registrado
+function reenviarPagoWA(recordId, pagoIndex) {
+  const r = records.find(x => x.id === recordId); if (!r||!r.movil) return;
+  const p = (r.pagos||[])[pagoIndex]; if (!p) return;
+  const capital = getCapitalPendiente(r);
+  const msg = buildMsgPago(r, {
+    tipo: p.tipo, monto: p.monto, fecha: p.fecha,
+    interes: p.tipo==='intereses' ? p.monto : 0,
+    capitalAmortizado: p.capitalAmortizado || 0,
+    capitalDespues: capital,
+    nuevaFecha: p.tipo!=='total' ? r.fechaPago : null,
+  });
+  abrirWA(r.movil, msg);
 }
 
+async function reabrirPrestamo(id) {
+  const r = records.find(x => x.id === id); if (!r) return;
+  if (!confirm('¿Reabrir este préstamo como activo?')) return;
+  await window._fsWrite({ ...r, pagado:false });
+  toast('Préstamo reabierto', 'info');
+  closeDetail();
+}
+
+async function deleteRecord(id) {
+  if (!confirm('¿Eliminar definitivamente de Firebase? No se puede deshacer.')) return;
+  try {
+    await window._fsDelete(id);
+    toast('Eliminado', 'info');
+    closeDetail();
+  } catch(e) { toast('Error al eliminar', 'error'); }
+}
+
+/* ═══════════════ RENDER ═══════════════ */
 function renderStats() {
   const activos = records.filter(r => !isCanceled(r));
-  const cap = activos.reduce((s,r)=>s+r.monto, 0);
-  const intH = activos.reduce((s,r)=>s+getInteresHasta(r,today()), 0);
+  const vencidos = records.filter(r => calcStatus(r) === 'vencido').length;
+  const cap  = activos.reduce((s,r) => s + getCapitalPendiente(r), 0);
+  const intH = activos.reduce((s,r) => s + getInteresHasta(r, today()), 0);
 
   document.getElementById('statsGrid').innerHTML = `
     <div class="stat-card info">
-      <div class="sc-head"><div class="sc-label">Capital Vivo</div></div>
+      <div class="sc-label">Capital colocado</div>
       <div class="sc-val">${fmtCurrency(cap)}</div>
-      <div class="sc-hint">${activos.length} deudores</div>
+      <div class="sc-hint">${activos.length} activos · ${records.filter(r=>isCanceled(r)).length} pagados</div>
     </div>
-    <div class="stat-card success">
-      <div class="sc-head"><div class="sc-label">Intereses Hoy</div></div>
+    <div class="stat-card ${vencidos > 0 ? 'danger' : 'success'}">
+      <div class="sc-label">Intereses al día de hoy</div>
       <div class="sc-val" style="color:var(--orange)">${fmtCurrency(intH)}</div>
-      <div class="sc-hint">Por cobrar</div>
+      <div class="sc-hint">${vencidos > 0 ? `⚠️ ${vencidos} en mora` : 'Sin mora activa'}</div>
     </div>
   `;
 }
 
 function renderTable() {
-  const q = document.getElementById('searchInput').value.toLowerCase();
+  const q   = document.getElementById('searchInput').value.toLowerCase();
   const fil = document.getElementById('filterStatus').value;
-  const filtered = records.filter(r => {
-    return r.cliente.toLowerCase().includes(q) && (!fil || calcStatus(r) === fil);
-  });
+  const filtered = records
+    .filter(r => r.cliente.toLowerCase().includes(q) && (!fil || calcStatus(r) === fil))
+    .sort((a,b) => calcStatus(a)==='vencido' ? -1 : calcStatus(b)==='vencido' ? 1 : 0);
 
   const tbody = document.getElementById('tableBody');
-  if(!filtered.length) { tbody.innerHTML = ''; document.getElementById('emptyState').style.display='block'; return; }
-  document.getElementById('emptyState').style.display='none';
+  const empty = document.getElementById('emptyState');
+  if (!filtered.length) { tbody.innerHTML=''; empty.style.display='block'; return; }
+  empty.style.display = 'none';
 
   tbody.innerHTML = filtered.map(r => {
-    const s = calcStatus(r);
-    const intHoy = getInteresHasta(r, today());
-    const dR = daysDiff(today(), r.fechaPago);
-
+    const s       = calcStatus(r);
+    const capital = getCapitalPendiente(r);
+    const intHoy  = getInteresHasta(r, today());
+    const dR      = daysDiff(today(), r.fechaPago);
     return `<tr>
-      <td class="td-name" onclick="showDetail('${r.id}')">${escHtml(r.cliente)}</td>
-      <td class="td-mono">${fmtCurrency(r.monto)}</td>
-      <td class="td-mono">${fmtDate(r.fechaPago)}${s==='vencido'?`<div class="td-mora">${Math.abs(dR)}d mora</div>`:''}</td>
-      <td class="td-mono" style="color:var(--orange)">${s==='pagado'?'—':fmtCurrency(intHoy)}</td>
+      <td class="td-name" onclick="showDetail('${r.id}')" style="cursor:pointer">${escHtml(r.cliente)}</td>
+      <td class="td-mono">${fmtCurrency(capital)}</td>
+      <td class="td-mono">
+        ${fmtDate(r.fechaPago)}
+        ${s==='vencido' ? `<div class="td-mora">${Math.abs(dR)}d mora</div>` : ''}
+      </td>
+      <td class="td-mono" style="color:${s==='pagado'?'var(--text3)':'var(--orange)'}">
+        ${s==='pagado' ? '—' : fmtCurrency(intHoy)}
+      </td>
       <td><span class="badge ${STATUS_CLASS[s]}">${STATUS_LABEL[s]}</span></td>
       <td>
-        <div style="display:flex;gap:4px">
-          ${(!isCanceled(r) && r.movil) ? `<button class="btn-icon whatsapp" onclick="dispararRecordatorioMora('${r.id}')"><i class="ti ti-brand-whatsapp"></i></button>` : `<button class="btn-icon" onclick="showDetail('${r.id}')"><i class="ti ti-eye"></i></button>`}
+        <div style="display:flex;gap:2px;align-items:center;">
+          <button class="btn-icon" onclick="showDetail('${r.id}')" title="Ver detalle">
+            <i class="ti ti-eye"></i>
+          </button>
+          ${(!isCanceled(r)) ? `
+          <button class="btn-icon" onclick="showPaymentForm('${r.id}')" title="Cobrar">
+            <i class="ti ti-cash"></i>
+          </button>` : ''}
+          ${(r.movil && !isCanceled(r)) ? `
+          <button class="btn-icon wa" onclick="abrirWA('${escHtml(r.movil)}', buildMsgMora(records.find(x=>x.id==='${r.id}')))" title="WhatsApp mora">
+            <i class="ti ti-brand-whatsapp"></i>
+          </button>` : ''}
         </div>
       </td>
     </tr>`;
@@ -748,13 +1132,26 @@ function renderTable() {
 
 function renderAll() { renderStats(); renderTable(); }
 
+/* ═══════════════ EXPORT CSV ═══════════════ */
 function exportCSV() {
-  const rows = records.map(r => [r.cliente, r.fecha, r.monto, r.tasa, r.fechaPago, STATUS_LABEL[calcStatus(r)]]);
-  const csv = '\ufeff' + [['Cliente','Fecha','Monto','Tasa','Vence','Estado'],...rows].map(e=>e.join(';')).join('\n');
-  const link = Object.assign(document.createElement('a'), { href: URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})), download:`prestamos.csv`});
+  const headers = ['Cliente','Móvil','Fecha','Capital orig.','Capital pend.','Tasa%','Vence','Total cobrado','Estado'];
+  const rows = records.map(r => [
+    r.cliente, r.movil||'', r.fecha,
+    r.montoOriginal||r.monto, getCapitalPendiente(r), r.tasa, r.fechaPago,
+    getTotalCobrado(r), STATUS_LABEL[calcStatus(r)]
+  ]);
+  const csv = '\ufeff' + [headers,...rows].map(row =>
+    row.map(v => { const t=String(v??''); return /[;"\n]/.test(t)?'"'+t.replace(/"/g,'""')+'"':t; }).join(';')
+  ).join('\n');
+  const link = Object.assign(document.createElement('a'), {
+    href: URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})),
+    download: `prestamos_${today()}.csv`
+  });
   document.body.appendChild(link); link.click(); link.remove();
+  toast('CSV exportado', 'info');
 }
 
+/* ═══════════════ INIT ═══════════════ */
 document.getElementById('topDate').textContent = fmtDate(today());
 </script>
 </body>
